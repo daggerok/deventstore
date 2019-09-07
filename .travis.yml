@@ -1,8 +1,8 @@
 notifications:
   email: false
-git:
-  quiet: true
-  depth: 3
+#git:
+#  quiet: true
+#  depth: 3
 
 language: java
 python: 3
@@ -37,7 +37,7 @@ before_install:
 #- docker-compose -v
 - source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
 - stop_any 80 8001 8002 8080 5432
-- git fetch -p -a --all --tags
+#- git fetch -p -a --all --tags
 - ./gradlew --stop
 
 stages:
@@ -50,8 +50,7 @@ jobs:
   - stage: test
     jdk: openjdk8
     name: build jdk8
-    if: tag IS blank
-    #if: type IS IN (push pull_request)
+    if: (tag IS blank) AND ((type = push) OR (type = pull_request))
     script:
     - cd $TRAVIS_BUILD_DIR && ./gradlew
     #- java -jar $TRAVIS_BUILD_DIR/target/*-all.jar  &
@@ -61,15 +60,13 @@ jobs:
 
   - stage: test
     jdk: openjdk8
-    if: tag IS blank
-    #if: type IS IN (push pull_request)
+    if: (tag IS blank) AND ((type = push) OR (type = pull_request))
     name: check dependencies updates jdk8
     script: cd $TRAVIS_BUILD_DIR && ./gradlew dependencyUpdates -Drevision=release
 
   - stage: test
     jdk: openjdk11
-    if: tag IS blank
-    #if: type IS IN (push pull_request)
+    if: (tag IS blank) AND ((type = push) OR (type = pull_request))
     name: build jdk11
     script:
     - cd $TRAVIS_BUILD_DIR && ./gradlew
@@ -80,8 +77,7 @@ jobs:
 
   - stage: test
     jdk: openjdk11
-    if: tag IS blank
-    #if: type IS IN (push pull_request)
+    if: (tag IS blank) AND ((type = push) OR (type = pull_request))
     name: check dependencies updates jdk11
     script: cd $TRAVIS_BUILD_DIR && ./gradlew dependencyUpdates -Drevision=release
 
@@ -96,27 +92,11 @@ jobs:
       - if [ "$TRAVIS_PULL_REQUEST" != "false" ] ; then exit 0 ; fi
       - export GITHUB_AUTH="-Dorg.ajoberstar.grgit.auth.password=${GITHUB_PASSWORD} -Dorg.ajoberstar.grgit.auth.username=daggerok"
     deploy:
-    # production delivery
     - provider: script
       skip_cleanup: true
       script: bash -c './gradlew ${GITHUB_AUTH} reckonTagPush -Preckon.scope=patch -Preckon.stage=final'
       on:
         branch: master
-    ## staging delivery
-    #- provider: script
-    #  skip_cleanup: true
-    #  script: bash -c './gradlew ${GITHUB_AUTH} reckonTagPush -Preckon.scope=patch -Preckon.stage=rc'
-    #  on:
-    #    all_branches: true
-    #    condition: $TRAVIS_BRANCH =~ ^(staging|stage)$
-    #    tags: false
-    ## in any other case:
-    #- provider: script
-    #  skip_cleanup: true
-    #  script: bash -c './gradlew ${GITHUB_AUTH} reckonTagPush -Preckon.scope=patch -Preckon.stage=beta'
-    #  on:
-    #    all_branches: true
-    #    tags: false
 
 cache:
   pip: true
