@@ -37,9 +37,19 @@ Checkout [gradle] tasks usage guides
 
 _resources_
 
-* [Easy releases with reckon gradle plugin](https://github.com/ajoberstar/reckon/blob/master/docs/index.md)
-* [Grgit related GitHub issue (question)](https://github.com/ajoberstar/reckon/issues/123)
-* [Grgit auth](http://ajoberstar.org/grgit/grgit-authentication.html)
+* [Easy releases with reckon gradle plugin]
+* [Grgit related GitHub issue (question)]
+* [Grgit auth]
+* [Travis CI deployment example]
+* [Travis CI script deployment]
+* [Travis CI deployment]
+
 <!-- refs -->
 
 [gradle]: gradle
+[Easy releases with reckon gradle plugin]: https://github.com/ajoberstar/reckon/blob/master/docs/index.md
+[Grgit related GitHub issue (question)]: https://github.com/ajoberstar/reckon/issues/123
+[Grgit auth]: http://ajoberstar.org/grgit/grgit-authentication.html
+[Travis CI deployment example]: https://github.com/daggerok/streaming-file-server/blob/master/.travis.yml#L240
+[Travis CI script deployment]: https://docs.travis-ci.com/user/deployment/script/
+[Travis CI deployment]: https://docs.travis-ci.com/user/deployment
