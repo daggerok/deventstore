@@ -2,14 +2,14 @@
 
 ## reckon plugin visioning
 
-_1) do some work_
+_1.1) do some work_
 
 ```bash
 ./gradlew build
 Reckoned version: 0.1.0-beta.0.1+20190907T115644Z
 ```
 
-_2) commit work you have done_
+_1.2) commit work you have done_
 
 ```bash
 # git add ... ; git commit -am ... 
@@ -19,15 +19,25 @@ Reckoned version: 0.1.0-beta.0.2+20190907T115839Z
 
 NOTE: as you can see, version: `0.1.0-beta.0.1+...` -> `0.1.0-beta.0.2+...`
 
-_3) when you ready for staging_
+_2) any time when you ready for staging_
 
 ```bash
 git push ...
+# same: gradle build reckonTagPush -Preckon.stage=beta ... # ommit -Preckon.scope=minor
 ./gradlew build reckonTagPush -Preckon.scope=minor -Preckon.stage=beta \
   -Dorg.ajoberstar.grgit.auth.username=daggerok \
   -Dorg.ajoberstar.grgit.auth.password=secret
-# same:   build reckonTagPush -Preckon.stage=beta
 Reckoned version: 0.1.0-beta.1
+```
+
+_3) release candidate or bug fix_
+
+```bash
+git push ...
+./gradlew build reckonTagPush -Preckon.stage=rc \
+  -Dorg.ajoberstar.grgit.auth.username=daggerok \
+  -Dorg.ajoberstar.grgit.auth.password=secret
+Reckoned version: 0.1.0-rc.1
 ```
 
 ## check dependencies updates
