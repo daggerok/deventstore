@@ -35,6 +35,11 @@ class PersistentCounter<C extends Command, E extends Event> {
 
 Checkout [gradle] tasks usage guides
 
-<!-- links -->
+_resources_
+
+* [Easy releases with reckon gradle plugin](https://github.com/ajoberstar/reckon/blob/master/docs/index.md)
+* [Grgit related GitHub issue (question)](https://github.com/ajoberstar/reckon/issues/123)
+* [Grgit auth](http://ajoberstar.org/grgit/grgit-authentication.html)
+<!-- refs -->
 
 [gradle]: gradle

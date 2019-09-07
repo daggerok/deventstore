@@ -1,6 +1,8 @@
+import org.ajoberstar.grgit.Grgit
 import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.ajoberstar.grgit.Credentials
 
 plugins {
     idea
@@ -12,7 +14,7 @@ plugins {
 allprojects {
     apply<BasePlugin>()
     group = "com.github.daggerok"
-    version = "1.0.0-SNAPSHOT"
+    // version = "1.0.0-SNAPSHOT" // version will be managed by reckon gradle plugin
 
     apply<KotlinPluginWrapper>()
     repositories {
@@ -56,9 +58,6 @@ subprojects {
 defaultTasks("clean", "build")
 
 tasks {
-    named("reckonTagCreate") {
-        dependsOn(check)
-    }
     named<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask>("dependencyUpdates") {
         resolutionStrategy {
             componentSelection {
@@ -72,4 +71,15 @@ tasks {
         }
         outputFormatter = "plain" // "json"
     }
+    named("reckonTagCreate") {
+        dependsOn(clean, check)
+    }
+    named("reckonTagPush") {
+        dependsOn(build)
+    }
+}
+
+reckon {
+    scopeFromProp()
+    stageFromProp("beta", "rc", "final")
 }

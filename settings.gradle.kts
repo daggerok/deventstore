@@ -1,4 +1,4 @@
-rootProject.name = "d-event-store"
+rootProject.name = "deventstore"
 
 include(
     ":api"/*,
