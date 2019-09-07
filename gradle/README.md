@@ -97,7 +97,7 @@ Reckoned version: 1.0.1-rc.1
 Reckoned version: 1.0.1-rc.1
 ```
 
-* Finally, after success acceptance testing we can deliver stable and fixed release:
+* Finally, after success acceptance testing we can deliver fixed and stable (1.0.1) release:
 
 ```shell script
 ./gradlew reckonTagPush -Preckon.scope=patch -Preckon.stage=final \
