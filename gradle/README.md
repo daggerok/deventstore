@@ -97,6 +97,15 @@ Reckoned version: 1.0.1-rc.1
 Reckoned version: 1.0.1-rc.1
 ```
 
+* Finally, after success acceptance testing we can deliver stable and fixed release:
+
+```shell script
+./gradlew reckonTagPush -Preckon.scope=patch -Preckon.stage=final \
+  -Dorg.ajoberstar.grgit.auth.username=daggerok \
+  -Dorg.ajoberstar.grgit.auth.password=secret
+Reckoned version: 1.0.1
+```
+
 ## check dependencies updates
 
 ```shell script
