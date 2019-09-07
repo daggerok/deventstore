@@ -1,0 +1,14 @@
+.idea/*
+.idea/runConfigurations
+!.idea/runConfigurations/*
+*.iml
+*.ipr
+*.iws
+*.log*
+/out/
+build/
+target/
+.DS_Store
+
+# Project exclude paths
+/.gradle/
