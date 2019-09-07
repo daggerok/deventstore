@@ -23,8 +23,8 @@ _2) any time when you ready for staging_
 
 ```bash
 git push ...
-# same: gradle build reckonTagPush -Preckon.stage=beta ... # ommit -Preckon.scope=minor
-./gradlew build reckonTagPush -Preckon.scope=minor -Preckon.stage=beta \
+# same: gradle reckonTagPush -Preckon.stage=beta ... # ommit -Preckon.scope=minor
+./gradlew reckonTagPush -Preckon.scope=minor -Preckon.stage=beta \
   -Dorg.ajoberstar.grgit.auth.username=daggerok \
   -Dorg.ajoberstar.grgit.auth.password=secret
 Reckoned version: 0.1.0-beta.1
@@ -34,10 +34,20 @@ _3) release candidate or bug fix_
 
 ```bash
 git push ...
-./gradlew build reckonTagPush -Preckon.stage=rc \
+./gradlew reckonTagPush -Preckon.stage=rc \
   -Dorg.ajoberstar.grgit.auth.username=daggerok \
   -Dorg.ajoberstar.grgit.auth.password=secret
 Reckoned version: 0.1.0-rc.1
+```
+
+_4) final release_
+
+```bash
+git push ...
+./gradlew reckonTagPush -Preckon.stage=final \
+  -Dorg.ajoberstar.grgit.auth.username=daggerok \
+  -Dorg.ajoberstar.grgit.auth.password=secret
+Reckoned version: 0.1.0
 ```
 
 ## check dependencies updates
