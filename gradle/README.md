@@ -50,6 +50,18 @@ git push ...
 Reckoned version: 0.1.0
 ```
 
+_5) customer 1.0.0 delivery_
+
+incrementing major: `major.minor.patch` -> `major+1.0.0`
+
+```bash
+git push ...
+./gradlew reckonTagPush -Preckon.scope=major -Preckon.stage=final \
+  -Dorg.ajoberstar.grgit.auth.username=daggerok \
+  -Dorg.ajoberstar.grgit.auth.password=secret
+Reckoned version: 1.0.0
+```
+
 ## check dependencies updates
 
 ```shell script
