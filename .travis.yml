@@ -77,7 +77,7 @@ jobs:
 
   - stage: deploy
     script: ./gradlew
-    if: branch = "master" AND type NOT IN (pull_request)
+    #if: branch = "master" AND type NOT IN (pull_request)
     ## seems like now it\s opional (see previous condition)
     #before_deploy:
     #  - if [ "$TRAVIS_PULL_REQUEST" != "false" ] ; then exit 0 ; fi
