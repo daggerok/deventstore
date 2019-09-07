@@ -62,6 +62,41 @@ git push ...
 Reckoned version: 1.0.0
 ```
 
+_6) let's assume, customers found a bug_
+
+So we must fix it ASAP. ...and we did.
+Now we wanna quickly provide patched release candidate...
+
+* Let's commit and push our changes:
+
+```shell script
+git commit -m "Important hotfix patch release."
+git push ...
+```
+
+* Now let's check which next version is going to be produced by reckon plugin:
+
+```shell script
+./gradlew build
+Reckoned version: 1.1.0-beta.0.0+20190907T135727Z
+```
+
+* But we need 1.0.1, ie not minor, but patch scope! So we must tell reckon about that:
+
+```shell script
+./gradlew build -Preckon.scope=patch -Preckon.stage=rc
+Reckoned version: 1.0.1-rc.1
+```
+
+* Now, everything looks great, so we can deliver that patch to our customers:
+
+```shell script
+./gradlew reckonTagPush -Preckon.scope=patch -Preckon.stage=rc \
+  -Dorg.ajoberstar.grgit.auth.username=daggerok \
+  -Dorg.ajoberstar.grgit.auth.password=secret
+Reckoned version: 1.0.1-rc.1
+```
+
 ## check dependencies updates
 
 ```shell script

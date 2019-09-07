@@ -1,8 +1,6 @@
-import org.ajoberstar.grgit.Grgit
 import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.ajoberstar.grgit.Credentials
 
 plugins {
     idea
