@@ -43,6 +43,7 @@ _resources_
 * [Travis CI deployment example]
 * [Travis CI script deployment]
 * [Travis CI deployment]
+* [Travis CI conditions]
 
 <!-- refs -->
 
@@ -53,3 +54,4 @@ _resources_
 [Travis CI deployment example]: https://github.com/daggerok/streaming-file-server/blob/master/.travis.yml#L240
 [Travis CI script deployment]: https://docs.travis-ci.com/user/deployment/script/
 [Travis CI deployment]: https://docs.travis-ci.com/user/deployment
+[Travis CI conditions]: https://docs.travis-ci.com/user/conditions-v1

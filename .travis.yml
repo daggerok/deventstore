@@ -37,6 +37,8 @@ before_install:
 #- docker-compose -v
 - source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
 - stop_any 80 8001 8002 8080 5432
+- git fetch -p -a --all --tags
+- ./gradlew --stop
 
 stages:
   - test
@@ -48,6 +50,8 @@ jobs:
   - stage: test
     jdk: openjdk8
     name: build jdk8
+    if: tag IS blank
+    #if: type IS IN (push pull_request)
     script:
     - cd $TRAVIS_BUILD_DIR && ./gradlew
     #- java -jar $TRAVIS_BUILD_DIR/target/*-all.jar  &
@@ -57,11 +61,15 @@ jobs:
 
   - stage: test
     jdk: openjdk8
+    if: tag IS blank
+    #if: type IS IN (push pull_request)
     name: check dependencies updates jdk8
     script: cd $TRAVIS_BUILD_DIR && ./gradlew dependencyUpdates -Drevision=release
 
   - stage: test
     jdk: openjdk11
+    if: tag IS blank
+    #if: type IS IN (push pull_request)
     name: build jdk11
     script:
     - cd $TRAVIS_BUILD_DIR && ./gradlew
@@ -72,47 +80,47 @@ jobs:
 
   - stage: test
     jdk: openjdk11
+    if: tag IS blank
+    #if: type IS IN (push pull_request)
     name: check dependencies updates jdk11
     script: cd $TRAVIS_BUILD_DIR && ./gradlew dependencyUpdates -Drevision=release
 
   - stage: deploy
-    script: ./gradlew
-    #if: branch = "master" AND type NOT IN (pull_request)
-    ## seems like now it\s opional (see previous condition)
-    #before_deploy:
-    #  - if [ "$TRAVIS_PULL_REQUEST" != "false" ] ; then exit 0 ; fi
+    script: false
+    if: branch = master
+    #if: branch =~ ^master$
+    #if: type NOT IN (pull_request)
     env:
-      secure: "R2bCFcKq/jT61L6e+WPCNSiRoAy0QhxV0PrR6CIOI7uy0wYR3YBjQSUSPgbvY70jK9JcaJy+mO1UDsBi6WqVW1J3r6aaok6aD9QAXAZav2nRX4ETs9bZviwedFXzpEP87+2PwNw5Iy2nUeMe4XKu6Id774YKRrpckJkMKZz54BNoxy0qyHM5gEmjq3TxCkz0SJHJZZfoJfRIZdBlkQ61678ugzHuQ0MqwiXC1YLOIpYCNKdbj/muIndGbo+O8oSLY+qYo2t2YAW+E+eon+8g7+zSTXwDblrzoT/6fR8nTzpbeMpVdPtbpu+Mmdw7ZbPqttamI/aVhZS9psF3muZMLaxAn0Uo6rfjorxIcZTJr8H7sE53JwgpVdb1qMsQBksisrFq28ZkLfFf41i2FDzzUDfsyTxCfeMDXw65JCYH7UDUdRon+J3D22LKbeyNCOOpDQV8fbYbOWsRZQHWeir1xN6EFEMVBC6hftltVDZTLcE+Rol6rqKhPQnx3W6IBEr+jYzQR2+yzyp6EyPgaC7MAazInBLdVRG5/+jfcyFX2QtKW7FzIm+P2HLOAnwjrXIkbNruTxkiRiKT9OkFnG6hkWKMrMOoiZEmuxqsS8P1fztgmDbWZPx7ionCSi/bZq7aoaKxlifPnn7ODZDkMIorevH0Yt3vwrq1QOkjzHS3+bY="
+      - secure: "R2bCFcKq/jT61L6e+WPCNSiRoAy0QhxV0PrR6CIOI7uy0wYR3YBjQSUSPgbvY70jK9JcaJy+mO1UDsBi6WqVW1J3r6aaok6aD9QAXAZav2nRX4ETs9bZviwedFXzpEP87+2PwNw5Iy2nUeMe4XKu6Id774YKRrpckJkMKZz54BNoxy0qyHM5gEmjq3TxCkz0SJHJZZfoJfRIZdBlkQ61678ugzHuQ0MqwiXC1YLOIpYCNKdbj/muIndGbo+O8oSLY+qYo2t2YAW+E+eon+8g7+zSTXwDblrzoT/6fR8nTzpbeMpVdPtbpu+Mmdw7ZbPqttamI/aVhZS9psF3muZMLaxAn0Uo6rfjorxIcZTJr8H7sE53JwgpVdb1qMsQBksisrFq28ZkLfFf41i2FDzzUDfsyTxCfeMDXw65JCYH7UDUdRon+J3D22LKbeyNCOOpDQV8fbYbOWsRZQHWeir1xN6EFEMVBC6hftltVDZTLcE+Rol6rqKhPQnx3W6IBEr+jYzQR2+yzyp6EyPgaC7MAazInBLdVRG5/+jfcyFX2QtKW7FzIm+P2HLOAnwjrXIkbNruTxkiRiKT9OkFnG6hkWKMrMOoiZEmuxqsS8P1fztgmDbWZPx7ionCSi/bZq7aoaKxlifPnn7ODZDkMIorevH0Yt3vwrq1QOkjzHS3+bY="
+    before_deploy:
+      - if [ "$TRAVIS_PULL_REQUEST" != "false" ] ; then exit 0 ; fi
+      - export GITHUB_AUTH="-Dorg.ajoberstar.grgit.auth.password=${GITHUB_PASSWORD} -Dorg.ajoberstar.grgit.auth.username=daggerok"
     deploy:
     # production delivery
     - provider: script
-      script: ./gradlew reckonTagPush -Preckon.scope=patch -Preckon.stage=final
-        -Dorg.ajoberstar.grgit.auth.password=${GITHUB_PASSWORD}
-        -Dorg.ajoberstar.grgit.auth.username=daggerok
+      skip_cleanup: true
+      script: bash -c './gradlew ${GITHUB_AUTH} reckonTagPush -Preckon.scope=patch -Preckon.stage=final'
       on:
-        all_branches: true
-        condition: $TRAVIS_BRANCH =~ ^(master|production)$
-        tags: false
-    # staging delivery
-    - provider: script
-      script: ./gradlew reckonTagPush -Preckon.scope=patch -Preckon.stage=rc
-        -Dorg.ajoberstar.grgit.auth.password=${GITHUB_PASSWORD}
-        -Dorg.ajoberstar.grgit.auth.username=daggerok
-      on:
-        all_branches: true
-        condition: $TRAVIS_BRANCH =~ ^(staging|stage)$
-        tags: false
-    # in any other case:
-    - provider: script
-      script: ./gradlew reckonTagPush -Preckon.scope=patch -Preckon.stage=beta
-        -Dorg.ajoberstar.grgit.auth.password=${GITHUB_PASSWORD}
-        -Dorg.ajoberstar.grgit.auth.username=daggerok
-      on:
-        all_branches: true
-        tags: false
+        branch: master
+    ## staging delivery
+    #- provider: script
+    #  skip_cleanup: true
+    #  script: bash -c './gradlew ${GITHUB_AUTH} reckonTagPush -Preckon.scope=patch -Preckon.stage=rc'
+    #  on:
+    #    all_branches: true
+    #    condition: $TRAVIS_BRANCH =~ ^(staging|stage)$
+    #    tags: false
+    ## in any other case:
+    #- provider: script
+    #  skip_cleanup: true
+    #  script: bash -c './gradlew ${GITHUB_AUTH} reckonTagPush -Preckon.scope=patch -Preckon.stage=beta'
+    #  on:
+    #    all_branches: true
+    #    tags: false
 
 cache:
   pip: true
   packages: true
   directories:
   - ~/.gradle
+  - .gradle
