@@ -7,7 +7,7 @@ development ready event store
 ![Schema]([event store])
 -->
 
-![Schema](https://github.com/daggerok/deventstore/blob/PR6/miMind/EventStore.png)
+![Schema](https://github.com/daggerok/deventstore/blob/master/miMind/EventStore.png)
 
 <!--
 
