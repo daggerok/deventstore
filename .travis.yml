@@ -91,7 +91,7 @@ jobs:
     deploy:
     - provider: script
       skip_cleanup: true
-      script: bash -c './gradlew ${GITHUB_AUTH} reckonTagPush -Preckon.scope=patch -Preckon.stage=final'
+      script: bash -c './gradlew ${GITHUB_AUTH} reckonTagPush -Preckon.stage=final'
       on:
         branch: master
 
