@@ -87,8 +87,8 @@ jobs:
     # production delivery
     - provider: script
       script: ./gradlew reckonTagPush -Preckon.scope=patch -Preckon.stage=final
-                -Dorg.ajoberstar.grgit.auth.password=${GITHUB_PASSWORD}
-                -Dorg.ajoberstar.grgit.auth.username=daggerok
+        -Dorg.ajoberstar.grgit.auth.password=${GITHUB_PASSWORD}
+        -Dorg.ajoberstar.grgit.auth.username=daggerok
       on:
         all_branches: true
         condition: $TRAVIS_BRANCH =~ ^(master|production)$
@@ -96,8 +96,8 @@ jobs:
     # staging delivery
     - provider: script
       script: ./gradlew reckonTagPush -Preckon.scope=patch -Preckon.stage=rc
-                -Dorg.ajoberstar.grgit.auth.password=${GITHUB_PASSWORD}
-                -Dorg.ajoberstar.grgit.auth.username=daggerok
+        -Dorg.ajoberstar.grgit.auth.password=${GITHUB_PASSWORD}
+        -Dorg.ajoberstar.grgit.auth.username=daggerok
       on:
         all_branches: true
         condition: $TRAVIS_BRANCH =~ ^(staging|stage)$
@@ -105,8 +105,8 @@ jobs:
     # in any other case:
     - provider: script
       script: ./gradlew reckonTagPush -Preckon.scope=patch -Preckon.stage=beta
-                -Dorg.ajoberstar.grgit.auth.username=daggerok
-                -Dorg.ajoberstar.grgit.auth.password=secret
+        -Dorg.ajoberstar.grgit.auth.password=${GITHUB_PASSWORD}
+        -Dorg.ajoberstar.grgit.auth.username=daggerok
       on:
         all_branches: true
         tags: false
