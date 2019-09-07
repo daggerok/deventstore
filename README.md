@@ -1,6 +1,10 @@
 # DEventStore [![Build Status](https://travis-ci.org/daggerok/deventstore.svg?branch=master)](https://travis-ci.org/daggerok/deventstore)
 development ready event store
 
+:thinking:
+
+[event store!]
+
 <!--
 
 # java-persistence
@@ -47,6 +51,7 @@ _resources_
 
 <!-- refs -->
 
+[event store!]: miMind/EventStore.png
 [gradle]: gradle
 [Easy releases with reckon gradle plugin]: https://github.com/ajoberstar/reckon/blob/master/docs/index.md
 [Grgit related GitHub issue (question)]: https://github.com/ajoberstar/reckon/issues/123
