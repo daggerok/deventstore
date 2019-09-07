@@ -1,8 +1,5 @@
 notifications:
   email: false
-#git:
-#  quiet: true
-#  depth: 3
 
 language: java
 python: 3
