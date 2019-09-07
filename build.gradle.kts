@@ -69,15 +69,16 @@ tasks {
         }
         outputFormatter = "plain" // "json"
     }
-    named("reckonTagCreate") {
-        dependsOn(clean, check)
-    }
-    named("reckonTagPush") {
-        dependsOn(build)
-    }
+    // named("reckonTagCreate") {
+    //     dependsOn(clean, check)
+    // }
+    // named("reckonTagPush") {
+    //     dependsOn(build)
+    // }
 }
 
 reckon {
     scopeFromProp()
-    stageFromProp("beta", "rc", "final")
+    // stageFromProp()
+    snapshotFromProp()
 }
