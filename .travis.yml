@@ -80,14 +80,14 @@ jobs:
 
   - stage: deploy
     script: false
-    if: branch = master
-    #if: branch =~ ^master$
-    #if: type NOT IN (pull_request)
     env:
       - secure: "R2bCFcKq/jT61L6e+WPCNSiRoAy0QhxV0PrR6CIOI7uy0wYR3YBjQSUSPgbvY70jK9JcaJy+mO1UDsBi6WqVW1J3r6aaok6aD9QAXAZav2nRX4ETs9bZviwedFXzpEP87+2PwNw5Iy2nUeMe4XKu6Id774YKRrpckJkMKZz54BNoxy0qyHM5gEmjq3TxCkz0SJHJZZfoJfRIZdBlkQ61678ugzHuQ0MqwiXC1YLOIpYCNKdbj/muIndGbo+O8oSLY+qYo2t2YAW+E+eon+8g7+zSTXwDblrzoT/6fR8nTzpbeMpVdPtbpu+Mmdw7ZbPqttamI/aVhZS9psF3muZMLaxAn0Uo6rfjorxIcZTJr8H7sE53JwgpVdb1qMsQBksisrFq28ZkLfFf41i2FDzzUDfsyTxCfeMDXw65JCYH7UDUdRon+J3D22LKbeyNCOOpDQV8fbYbOWsRZQHWeir1xN6EFEMVBC6hftltVDZTLcE+Rol6rqKhPQnx3W6IBEr+jYzQR2+yzyp6EyPgaC7MAazInBLdVRG5/+jfcyFX2QtKW7FzIm+P2HLOAnwjrXIkbNruTxkiRiKT9OkFnG6hkWKMrMOoiZEmuxqsS8P1fztgmDbWZPx7ionCSi/bZq7aoaKxlifPnn7ODZDkMIorevH0Yt3vwrq1QOkjzHS3+bY="
-    before_deploy:
-      - if [ "$TRAVIS_PULL_REQUEST" != "false" ] ; then exit 0 ; fi
-      - export GITHUB_AUTH="-Dorg.ajoberstar.grgit.auth.password=${GITHUB_PASSWORD} -Dorg.ajoberstar.grgit.auth.username=daggerok"
+    if: (branch = master) AND (type = pull_request)
+    #if: type NOT IN (pull_request)
+    #if: branch =~ ^master$
+    #before_deploy:
+    #  - if [ "$TRAVIS_PULL_REQUEST" != "false" ] && [ "$TRAVIS_BRANCH" != "master" ] ; then exit 0 ; fi
+    #  - export GITHUB_AUTH="-Dorg.ajoberstar.grgit.auth.password=${GITHUB_PASSWORD} -Dorg.ajoberstar.grgit.auth.username=daggerok"
     deploy:
     - provider: script
       skip_cleanup: true

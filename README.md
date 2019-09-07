@@ -3,7 +3,11 @@ development ready event store
 
 :thinking:
 
-[event store!]
+<!--
+![Schema]([event store])
+-->
+
+![Schema](https://github.com/daggerok/deventstore/blob/PR6/miMind/EventStore.png)
 
 <!--
 
@@ -51,7 +55,7 @@ _resources_
 
 <!-- refs -->
 
-[event store!]: miMind/EventStore.png
+[event store]: miMind/EventStore.png
 [gradle]: gradle
 [Easy releases with reckon gradle plugin]: https://github.com/ajoberstar/reckon/blob/master/docs/index.md
 [Grgit related GitHub issue (question)]: https://github.com/ajoberstar/reckon/issues/123
