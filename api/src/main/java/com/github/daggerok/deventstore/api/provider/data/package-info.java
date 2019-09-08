@@ -2,18 +2,18 @@
  * EventStore can be in-memory or persistent, but in any case
  * it should use some abstraction around data its manipulating...
  *
- * DataProvider examples:
+ * DataStoreProvider examples:
  *
- * InMemoryDataProvider:
+ * InMemoryDataStoreProvider:
  * - ConcurrentHashMapEventLog
  * FilesystemDataProvider:
  * - FileAppendOnlyEventLog
- * RdbmsDataProvider:
+ * RdbmsDataStoreProvider:
  * - H2EventLog
  * - MysqlEventLog
  * - PostgresqlEventLog
- * NoSqlDataProvider:
+ * NoSqlDataStoreProvider:
  * - MongodbEventLog
  * - RedisEventLog
  */
-package com.github.daggerok.eventstore.api.provider.data;
+package com.github.daggerok.deventstore.api.provider.data;

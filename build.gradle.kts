@@ -11,7 +11,7 @@ plugins {
 
 allprojects {
     apply<BasePlugin>()
-    group = "com.github.daggerok"
+    group = "com.github.daggerok.deventstore"
     // version = "1.0.0-SNAPSHOT" // version will be managed by reckon gradle plugin
 
     apply<KotlinPluginWrapper>()
@@ -21,12 +21,15 @@ allprojects {
 }
 
 subprojects {
-    apply<JavaPlugin>()
+    apply<JavaLibraryPlugin>()
     configure<JavaPluginConvention> {
         sourceCompatibility = JavaVersion.VERSION_1_8
     }
     // apply<org.jetbrains.kotlin.gradle.plugin.KotlinPlatformJvmPlugin>()
     dependencies {
+        implementation(/*enforcedPlatform*/platform("com.fasterxml.jackson:jackson-bom:2.10.0.pr2"))
+        implementation(/*enforcedPlatform*/platform("io.vavr:vavr:0.10.2"))
+
         implementation(kotlin("stdlib-jdk8"))
 
         implementation(platform("io.projectreactor:reactor-bom:Californium-SR11")) // Californium-RELEASE

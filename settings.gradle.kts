@@ -1,6 +1,7 @@
 rootProject.name = "deventstore"
 
 include(
-    ":api"/*,
+    ":api",
+    ":jackson-json-string-serialization"/*,
     ":example"*/
 )
