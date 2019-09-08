@@ -39,7 +39,9 @@ subprojects {
         implementation(platform("org.springframework:spring-framework-bom:5.1.9.RELEASE"))
         implementation("org.springframework:spring-context-support")
 
-        testImplementation("junit:junit:4.12")
+        testImplementation(platform("org.junit:junit-bom:5.5.1"))
+        testImplementation("org.junit.jupiter:junit-jupiter")
+        testImplementation("org.assertj:assertj-core:3.13.2")
     }
     tasks {
         withType<KotlinCompile> {

@@ -1,10 +1,13 @@
 package com.github.daggerok.deventstore.data.serialization.json;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.daggerok.deventstore.api.provider.data.serialisation.json.JsonStringSerializationProvider;
 import com.github.daggerok.deventstore.data.serialization.json.config.JacksonConfig;
 import io.vavr.control.Try;
+import org.springframework.core.ParameterizedTypeReference;
 
+import java.lang.reflect.Type;
 import java.util.Objects;
 
 /* DomainEvent <-> JSON String */
