@@ -12,4 +12,4 @@
  * - RabbitmqTransport
  * - KafkaTransport
  */
-package com.github.daggerok.eventstore.api.provider.messaging;
+package com.github.daggerok.deventstore.api.provider.messaging;
