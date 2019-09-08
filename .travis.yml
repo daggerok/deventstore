@@ -97,6 +97,8 @@ jobs:
         branch: master
 
   - stage: deploy
+    env:
+      secure: "rMVeoE0TGkC2ld/vt7yMtNmkb5ZuKCq4EWTlFDgKBZqRCaIZVZ+zJv1yHXf2mGEBt7j4tVn+fwlUm+8clA2vXUx4eRL+SBEz+MSS8fZRSgRLoGwvdhsH2Sbgx4logXBGd04rStRQgrh0Px/7SaLmtXGoSlmy8LQObZlfDg0hHKxa9dlPjhcjHYo3D4QmE00w9IAUp1cU2AtlUtxd+CsxBmBYHhRTRfQU1IZTseFGPflNjTRqpM5RM/IWe6ecdwKCdVZpqHH1VOmHtsbxxYBSYxt5QQtP5Pg2brUcJha5TCSs81dZ+SnleoEt1iIvW535UVCdLUKxPw56F2Q2ZEyjYWJcX5JRgfZ0Bxwwsg1Pj746utvzsgMntRNm0taWpQsGOSL7tAGQZgtB8TIP55I1QR/YmR0V7t1aYJ/4ooVgnaB5jyqmLQSCRbdbD9prZ+a4dmjTHyBBg4B7gAB/IP6IOyLFm6MOLmTJnVS7nofDTHTvpQ0+GoZuQqZLGc1AUPwbNTZIOO3PNKSUhoLtD00k9dBytWtTA0nzbbfKTa4auvavDkpQNEcoxZGRxnQsdZN4Rw6j/PAEd4Y67iMq8TPm2MCNXPpcOWNxO2ceh3JYl3tfiXqlIgAt9glLGd54RB60OBQa40Sy9oQFlSQIgLsRUjVI/tY/LUN8wHFgH34BvEM="
     jdk: openjdk11
     rvm: 2.6.4
     name: Jekyll GitHub Pages
