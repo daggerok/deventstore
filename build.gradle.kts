@@ -1,3 +1,4 @@
+import org.apache.tools.ant.taskdefs.condition.Os
 import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -7,6 +8,7 @@ plugins {
     kotlin("jvm") version "1.3.50"
     id("org.ajoberstar.reckon") version "0.11.0"
     id("com.github.ben-manes.versions") version "0.24.0"
+
 }
 
 allprojects {
@@ -74,12 +76,26 @@ tasks {
         }
         outputFormatter = "plain" // "json"
     }
-    // named("reckonTagCreate") {
-    //     dependsOn(clean, check)
-    // }
-    // named("reckonTagPush") {
-    //     dependsOn(build)
-    // }
+    register<Exec>("bundle") {
+        workingDir = file("docs")
+        if (Os.isFamily(Os.FAMILY_WINDOWS))  commandLine("cmd", "/c", "bundle")
+        else commandLine("sh", "-c", "bundle")
+    }
+    register<Exec>("bundle-exec-just-the-docs-rake-search-init") {
+        workingDir = file("docs")
+        if (Os.isFamily(Os.FAMILY_WINDOWS))  commandLine("cmd", "/c", "bundle exec just-the-docs rake search:init")
+        else commandLine("sh", "-c", "bundle exec just-the-docs rake search:init")
+    }
+    register<Exec>("bundle-exec-jekyll-build") {
+        workingDir = file("docs")
+        if (Os.isFamily(Os.FAMILY_WINDOWS))  commandLine("cmd", "/c", "bundle exec jekyll build")
+        else commandLine("sh", "-c", "bundle exec jekyll build")
+    }
+    register<Exec>("bundle-exec-jekyll-serve") {
+        workingDir = file("docs")
+        if (Os.isFamily(Os.FAMILY_WINDOWS))  commandLine("cmd", "/c", "bundle exec jekyll serve")
+        else commandLine("sh", "-c", "bundle exec jekyll serve")
+    }
 }
 
 reckon {
