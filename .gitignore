@@ -5,10 +5,10 @@
 *.ipr
 *.iws
 *.log*
-/out/
 build/
 target/
 .DS_Store
-
-# Project exclude paths
+/out/
+**/out/**
 /.gradle/
+**/.gradle/**
