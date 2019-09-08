@@ -1,0 +1,17 @@
+{
+  "0": {
+    "id": "0",
+    "title": "",
+    "content": "404 Page not found :( The requested page could not be found.",
+    "url": "/deventstore/404.html",
+    "relUrl": "/404.html"
+  },
+  "1": {
+    "id": "1",
+    "title": "DEventStore",
+    "content": "TODO: implement me please…",
+    "url": "/deventstore/",
+    "relUrl": "/"
+  }
+  
+}
