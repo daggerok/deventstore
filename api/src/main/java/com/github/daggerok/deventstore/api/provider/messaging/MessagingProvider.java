@@ -4,5 +4,5 @@ import java.util.function.Consumer;
 
 public interface MessagingProvider {
     void publish(Object event);
-    Subscription subscribePublisher(Consumer<Object> subscriber);
+    Subscription subscribePublished(Consumer<Object> subscriber);
 }
