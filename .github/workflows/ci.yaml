@@ -40,9 +40,8 @@ jobs:
     - run: ./gradlew dependencies
     - run: ./gradlew
   dependency-updates:
-    if: github.event.inputs.trigger == ''
-      || !startsWith(github.event.inputs.trigger, 'm')
-      || !startsWith(github.event.inputs.trigger, 'M')
+    if: startsWith(github.event.inputs.trigger, 'm')
+      || startsWith(github.event.inputs.trigger, 'M')
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
