@@ -93,14 +93,14 @@ jobs:
     - uses: actions/setup-ruby@v1
       with:
         ruby-version: ${{ env.RUBY_VERSION }}
-    - run: ./gradlew dependencies
     - run: set -e
-    - run: sudo ./gradlew gem-install-bundler-2-2-24
+    - run: ./gradlew dependencies
+    - run: ./gradlew gem-i-user-install-no-document-bundler-2-2-24
     - run: ./gradlew bundle
     - run: ./gradlew bundle-exec-just-the-docs-rake-search-init
     - run: ./gradlew bundle-exec-jekyll-build
-    #- name: Deploy 🚀
-    #  uses: JamesIves/github-pages-deploy-action@4.1.0
-    #  with:
-    #    branch: gh-pages # The branch the action should deploy to.
-    #    folder: docs/_site # The folder the action should deploy.
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@4.1.0
+      with:
+        branch: gh-pages # The branch the action should deploy to.
+        folder: docs/_site # The folder the action should deploy.
