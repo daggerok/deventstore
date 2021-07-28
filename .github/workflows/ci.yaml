@@ -95,7 +95,7 @@ jobs:
         ruby-version: ${{ env.RUBY_VERSION }}
     - run: ./gradlew dependencies
     - run: set -e
-    - run: sudo ./gradlew gem-install-bundler
+    - run: sudo ./gradlew gem-install-bundler-2-2-24
     - run: ./gradlew bundle
     - run: ./gradlew bundle-exec-just-the-docs-rake-search-init
     - run: ./gradlew bundle-exec-jekyll-build
