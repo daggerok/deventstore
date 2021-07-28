@@ -76,6 +76,11 @@ tasks {
         }
         outputFormatter = "plain" // "json"
     }
+    register<Exec>("gem-install-bundler") {
+        workingDir = file("docs")
+        if (Os.isFamily(Os.FAMILY_WINDOWS))  commandLine("cmd", "/c", "gem install bundler")
+        else commandLine("sh", "-c", "gem install bundler")
+    }
     register<Exec>("bundle") {
         workingDir = file("docs")
         if (Os.isFamily(Os.FAMILY_WINDOWS))  commandLine("cmd", "/c", "bundle")
