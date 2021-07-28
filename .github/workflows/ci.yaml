@@ -40,8 +40,9 @@ jobs:
     - run: ./gradlew dependencies
     - run: ./gradlew
   dependency-updates:
-    if: startsWith(github.event.inputs.trigger, 'm')
-      || startsWith(github.event.inputs.trigger, 'M')
+    if: github.event.inputs.trigger == ''
+      || !startsWith(github.event.inputs.trigger, 'm')
+      || !startsWith(github.event.inputs.trigger, 'M')
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -66,8 +67,11 @@ jobs:
     - run: ./gradlew dependencies
     - run: ./gradlew dependencyUpdates -Drevision=release
   docs:
-    if: startsWith(github.event.inputs.trigger, 'm')
-      || startsWith(github.event.inputs.trigger, 'M')
+    if: github.ref == 'refs/heads/master'
+          && (
+            startsWith(github.event.inputs.trigger, 'm')
+              || startsWith(github.event.inputs.trigger, 'M')
+          )
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -94,6 +98,7 @@ jobs:
         ruby-version: ${{ env.RUBY_VERSION }}
     - run: ./gradlew dependencies
     - run: set -e
+    - run: sudo ./gradlew gem-install-bundler
     - run: ./gradlew bundle
     - run: ./gradlew bundle-exec-just-the-docs-rake-search-init
     - run: ./gradlew bundle-exec-jekyll-build

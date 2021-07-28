@@ -76,24 +76,30 @@ tasks {
         }
         outputFormatter = "plain" // "json"
     }
+    val windows = Os.isFamily(Os.FAMILY_WINDOWS)
+    register<Exec>("gem-install-bundler") {
+        workingDir = file("docs")
+        if (windows) commandLine("cmd", "/c", "gem install bundler")
+        else commandLine("sh", "-c", "gem install bundler")
+    }
     register<Exec>("bundle") {
         workingDir = file("docs")
-        if (Os.isFamily(Os.FAMILY_WINDOWS))  commandLine("cmd", "/c", "bundle")
+        if (windows) commandLine("cmd", "/c", "bundle")
         else commandLine("sh", "-c", "bundle")
     }
     register<Exec>("bundle-exec-just-the-docs-rake-search-init") {
         workingDir = file("docs")
-        if (Os.isFamily(Os.FAMILY_WINDOWS))  commandLine("cmd", "/c", "bundle exec just-the-docs rake search:init")
+        if (windows) commandLine("cmd", "/c", "bundle exec just-the-docs rake search:init")
         else commandLine("sh", "-c", "bundle exec just-the-docs rake search:init")
     }
     register<Exec>("bundle-exec-jekyll-build") {
         workingDir = file("docs")
-        if (Os.isFamily(Os.FAMILY_WINDOWS))  commandLine("cmd", "/c", "bundle exec jekyll build")
+        if (windows) commandLine("cmd", "/c", "bundle exec jekyll build")
         else commandLine("sh", "-c", "bundle exec jekyll build")
     }
     register<Exec>("bundle-exec-jekyll-serve") {
         workingDir = file("docs")
-        if (Os.isFamily(Os.FAMILY_WINDOWS))  commandLine("cmd", "/c", "bundle exec jekyll serve")
+        if (windows) commandLine("cmd", "/c", "bundle exec jekyll serve")
         else commandLine("sh", "-c", "bundle exec jekyll serve")
     }
 }
