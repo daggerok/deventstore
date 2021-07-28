@@ -70,7 +70,7 @@ GEM
     wdm (0.1.1)
 
 PLATFORMS
-  universal-darwin-20
+  ruby
 
 DEPENDENCIES
   jekyll (~> 3.9.1)

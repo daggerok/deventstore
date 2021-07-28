@@ -77,10 +77,10 @@ tasks {
         outputFormatter = "plain" // "json"
     }
     val windows = Os.isFamily(Os.FAMILY_WINDOWS)
-    register<Exec>("gem-install-bundler") {
+    register<Exec>("gem-i-user-install-no-document-bundler-2-2-24") {
         workingDir = file("docs")
-        if (windows) commandLine("cmd", "/c", "gem install bundler")
-        else commandLine("sh", "-c", "gem install bundler")
+        if (windows) commandLine("cmd", "/c", "gem install --user-install --no-document bundler:2.2.24")
+        else commandLine("sh", "-c", "gem install --user-install --no-document bundler:2.2.24")
     }
     register<Exec>("bundle") {
         workingDir = file("docs")
