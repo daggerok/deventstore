@@ -67,10 +67,8 @@ jobs:
     - run: ./gradlew dependencyUpdates -Drevision=release
   docs:
     if: github.ref == 'refs/heads/master'
-          && (
-            startsWith(github.event.inputs.trigger, 'm')
-              || startsWith(github.event.inputs.trigger, 'M')
-          )
+      || startsWith(github.event.inputs.trigger, 'm')
+      || startsWith(github.event.inputs.trigger, 'M')
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
